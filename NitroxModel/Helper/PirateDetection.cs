@@ -29,38 +29,20 @@ namespace NitroxModel.Helper
 
         public static bool TriggerOnDirectory(string subnauticaRoot)
         {
-            if (!IsPirateByDirectory(subnauticaRoot))
-            {
-                return false;
-            }
 
-            OnPirateDetected();
-            return true;
+            return false;
         }
 
         private static event EventHandler pirateDetected;
 
         private static bool IsPirateByDirectory(string subnauticaRoot)
         {
-            string subdirDll = Path.Combine(subnauticaRoot, "Subnautica_Data", "Plugins", "x86_64", "steam_api64.dll");
-            if (File.Exists(subdirDll) && !FileSystem.Instance.IsTrustedFile(subdirDll))
-            {
-                return true;
-            }
-            // Dlls might be in root if cracked game (to override DLLs in sub directories).
-            string rootDll = Path.Combine(subnauticaRoot, "steam_api64.dll");
-            if (File.Exists(rootDll) && !FileSystem.Instance.IsTrustedFile(rootDll))
-            {
-                return true;
-            }
-
             return false;
         }
 
         private static void OnPirateDetected()
         {
-            pirateDetected?.Invoke(null, EventArgs.Empty);
-            HasTriggered = true;
+            return;
         }
     }
 }
